@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calling Functions</title>
+	<script>
+		function buttonReport(buttonId, buttonName, buttonValue) {
+			var userMsg1 = "Button id: " + buttonId + "\n";
+			var userMsg2 = "Button name: " + buttonName + "\n";
+			var userMsg3 = "Button value: " + buttonValue;
+			var msg = userMsg1 + userMsg2 + userMsg3;
+			alert(msg);
+		}
+	</script>
+</head>
+<body>
+	<input type="button" id="id1" name="Left Hand Button" value="Left" onclick="buttonReport(this.id, this.name, this.value)"/>
+	<input type="button" id="id2" name="Center Button" value="Center" onclick="buttonReport(this.id, this.name, this.value)"/>
+	<input type="button" id="id3" name="Right Hand Button" value="Right" onclick="buttonReport(this.id, this.name, this.value)"/>
+</body>
+</html>

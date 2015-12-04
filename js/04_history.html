@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+		alert("You've visited " + history.length + " web pages in this brower session");
+	</script>
+</head>
+<body>
+	<script>
+		var offset = prompt("Where do you want to go?");
+		history.go(offset);
+		location.reload(true); /* oops */
+	</script>
+</body>
+</html>
