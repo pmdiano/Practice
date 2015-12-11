@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Date Object</title>
+</head>
+<body>
+    <script>
+        var mydate = new Date();
+        document.write("DateString: " + mydate.toDateString() + "<br/>");
+        document.write("TimeString: " + mydate.toTimeString() + "<br/>");
+        document.write("String: " + mydate.toString() + "<br/>");
+        document.write("LocaleString: " + mydate.toLocaleString() + "<br/>");
+        document.write("UTCString: " + mydate.toUTCString() + "<br/>");
+        //document.write("UTC: " + mydate.UTC() + "<br/>");  // why this not working?
+        document.write("valueOf: " + mydate.valueOf() + "<br/>");
+    </script>
+
+    <p> hello this is a p </p>
+    <script>
+        var ageDavid = 23;
+        var ageMary = 27;
+        var ageChris = 31, ageSandy = 19;
+        document.write("The youngest person is " + Math.min(ageDavid, ageSandy, ageChris, ageMary) + " years old<br />");
+        document.write("The oldest person is " + Math.max(ageDavid, ageSandy, ageChris, ageMary) + " years old<br />");
+    </script>
+
+    <p> Some random number </p>
+    <script>
+        function myrand(range) {
+            with (Math) {
+                var ret = round(random() * range);
+            }
+            return ret;
+        }
+        document.write("Several random numbers between 0 and 100: " + myrand(100) + " " + myrand(100) + " " + myrand(100) + " " + myrand(100));
+    </script>
+
+    <div>
+        <input type="button" onclick="history.back();" value="Back" />
+        <input type="button" onclick="history.forward();" value="Forward" />
+    </div>
+</body>
