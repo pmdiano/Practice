@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Banner Cycler</title>
+	<script>
+		var links = ['https://www.google.com', 'https://www.microsoft.com'];
+		var counter = 0;
+		function run() {
+			setInterval(cycle, 2000);
+		}
+		function cycle() {
+			counter++;
+			if (counter == banners.length) counter = 0;
+			document.getElementById("banner").src = banners[counter];
+			document.getElementById("banner_link").href = links[counter];
+		}
+	</script>
+</head>
+<body onload = "run();">
+	<script>
+		var banners = ['dog1.jpg', 'dog2.jpg'];
+	</script>
+	<a id="banner_link" href='https://www.google.com'>
+		<img id="banner" alt="banner" src="dog1.jpg" />
+	</a>
+</body>
+</html>
