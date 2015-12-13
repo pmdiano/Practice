@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Strings and Arrays</title>
+	<script>
+		function wrangleArray() {
+			var sentence = prompt("Enter a string", "JavaScript is a really cool language");
+			var newSentence = "";
+			document.getElementById("div1").innerHTML = "<p>" + sentence + "</p>";
+			// Convert to an array
+			var words = sentence.split(" ");
+			var message = words.splice(3, 2, "powerful");
+			alert('Removed words: ' + message.join('^_^') + message.length);
+			document.getElementById("div2").innerHTML = "<p>" + words.join(" ") + "</p>";
+		}
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+	<script>wrangleArray();</script>
+</body>
+</html>
