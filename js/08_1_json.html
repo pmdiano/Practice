@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parsing and Stringifying JSON</title>
+    <script>
+        function jsonParse(){
+            var inString = prompt("Enter JSON object");
+            var out = "";
+            myObject = JSON.parse(inString);
+            for (i in myObject) {
+                out += "Property: " + i + " = ";
+                if (typeof myObject[i] == 'object') {
+                    for (j in myObject[i]) {
+                        out += j + ":" + myObject[i][j] + " ";
+                    }
+                    out += '\n';
+                } else {
+                    out += myObject[i] + '\n';
+                }
+            }
+            alert(out);
+        }
+        function jsonStringify() {
+            var Xix = new Object();
+            Xix.year = 1989;
+            Xix.month = "September";
+            Xix.sex = "male";
+            Xix.occupation = "software engineer";
+            var xixHome = new Object();
+            xixHome.country = "China";
+            xixHome.province = "Jiangsu";
+            Xix.home = xixHome;
+            Xix.courses=["Data Structure", "Operating System", "Computer Networks"];
+
+            alert(JSON.stringify(Xix));
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="Parse" onclick="jsonParse();" />
+    <input type="button" value="Stringify" onclick="jsonStringify();" />
+</body>
