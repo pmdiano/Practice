@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hour 7 Exercise</title>
+    <script>
+        Date.prototype.getYesterdayString = function(){
+            var oneDay = 1000 * 3600 * 24;
+            var now = this.getTime();
+
+            this.setTime(now - oneDay);
+            var yesterday = this.toDateString();
+
+            this.setTime(now);
+            return yesterday;
+        }
+        var date = new Date();
+    </script>
+    <script type="text/javascript">
+        function Card(){
+            var t = Math.ceil(Math.random() * 4);
+            var n = Math.ceil(Math.random() * 13);
+            var type = '', number = '';
+
+            switch(t) {
+                case 1: type="Diamonds"; break;
+                case 2: type="Hearts"; break;
+                case 3: type="Spades"; break;
+                case 4: type="Clubs"; break;
+            }
+
+            switch(n) {
+                case 1: number="Ace"; break;
+                case 11: number="Jack"; break;
+                case 12: number="Queen"; break;
+                case 13: number="King"; break;
+                default: number = n; break;
+            }
+
+            this.info = number + ' ' + type;
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <input type="button" value="What's today?" onclick="alert(date.toDateString());" />
+        <input type="button" value="What's yesterday?" onclick="alert(date.getYesterdayString());" />
+    </div>
+    <div>
+        <input type="button" value="Draw a card" onclick="alert('It\'s a ' + (new Card()).info);" />
+    </div>
+</body>
