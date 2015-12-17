@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canceling Default Behavior</title>
+    <script>
+        window.onload = function() {
+            document.getElementById("form1").onsubmit = function() {
+                var allowSubmit = true;
+                if (document.getElementById("user").value == "") {
+                    alert("Name field cannot be blank");
+                    allowSubmit = false;
+                }
+                if (allowSubmit) alert("Data OK - submitting form");
+                return allowSubmit;
+            }
+        }
+    </script>
+</head>
+<body>
+    <form id="form1">
+        Name: <input type="text" value="" name="username" id="user" /> [Required field]<br/>
+        Phone: <input type="text" value="" name="telephone" id="phone" /> [Optional field]<br/>
+        <input type="submit" />
+    </form>
+</body>
+</html>
