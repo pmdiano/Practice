@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The event object</title>
+    <script>
+        function showEvent() {
+            var out = "";
+            document.getElementById("myButton").onclick = function(e) {
+                for (i in e) {
+                    out += i + " = " + e[i] + "<br/>";
+                }
+                document.getElementById("output").innerHTML = out;
+            }
+        }
+        window.onload = showEvent;
+    </script>
+</head>
+<body>
+    <input id="myButton" type="button" value="Show Event Properties" />
+    <div id="output"></div>
+</body>
+</html>
