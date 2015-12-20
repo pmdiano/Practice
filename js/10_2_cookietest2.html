@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cookie Testing</title>
+    <script src="10_2_cookie.js"></script>
+    <script>
+        window.onload = function() {
+            var cookies = getCookie("myCookieData").split('#');
+            var output = "Your cookie value is:<br/>";
+            for (i in cookies) {
+                output += cookies[i] + "<br/>";
+            }
+            document.getElementById("output").innerHTML = output;
+        }
+    </script>
+</head>
+<body>
+    <a href="10_2_cookietest.html">Back to Cookie Test Page 1</a><br/>
+    <div id="output"></div>
+</body>
+<html>

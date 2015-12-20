@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Using Cookies</title>
+    <script>
+        function createCookie(name, value, days, path, domain, secure) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days*24*60*60*1000));
+                var expires = date.toGMTString();
+            }
+            else var expires = "";
+            cookieString = name + "=" + escape(value);
+            if (expires) cookieString += "; expires=" + expires;
+            if (path) cookieString += "; path=" + escape(path);
+            if (domain) cookieString += "; domain=" + escape(domain);
+            if (secure) cookieString += "; secure";
+            document.cookie = cookieString;
+        }
+        createCookie("username","Sam Jones", 5);
+        createCookie("location", "username", 5);
+        createCookie("status", "fullmember", 5);
+    </script>
+</head>
+<body>
+    Check the cookies for this domain using your browser tools.
+</body>
+</html>
