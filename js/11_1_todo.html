@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    <script>
+        function countListItems() {
+            var olElement = document.getElementById("toDoList");
+            var count = 0;
+            for (var i=0; i < olElement.childNodes.length; i++) {
+                if (olElement.childNodes[i].nodeType == 1) count++;
+            }
+            alert("The ordered list contains " + count + " items out of " + olElement.childNodes.length);
+        }
+
+        function showComments() {
+            var body = document.getElementsByTagName("body");
+            body = body[0];
+            comments = "";
+            for (var i=0; i < body.childNodes.length; i++) {
+                if (body.childNodes[i].nodeType == 8) {
+                    comments += body.childNodes[i].nodeValue + "\n";
+                }
+            }
+            alert("The comments in <body> are:\n" + comments);
+        }
+
+        window.addEventListener('load', countListItems, false);
+        window.addEventListener('load', showComments, false);
+    </script>
+</head>
+<body>
+    <!-- comment 1 -->
+    <h1>Things To Do</h1>
+    <ol id="toDoList">
+        <li>Learn JavaScript</li>
+        <!-- comment 2 -->
+        <li>Learn Node.js</li>
+        <li>Make my website</li>
+    </ol>
+    <!-- comment 3 -->
+    <p id="todoNotes">Make sure all these are completed by Jan 15 2016 so you can chill!</p>
+</body>
+</html>
