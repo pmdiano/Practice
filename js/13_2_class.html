@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Switching classes with JavaScript</title>
+    <style>
+        .classA {
+            width: 180px;
+            border: 3px solid black;
+            background-color: white;
+            color: red;
+            font: normal 24px arial, helvetica, sans-serif;
+            padding: 20px;
+        }
+        .classB {
+            width: 180px;
+            border: 3px dotted white;
+            background-color: black;
+            color: yellow;
+            font: italic bold 24px "Times New Roman", serif;
+            padding: 20px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            document.getElementById("btn1").onclick = function () {
+                var e = document.getElementById("id1");
+                if (e.className == "classA") {
+                    e.className = "classB";
+                } else {
+                    e.setAttribute("class", "classA");
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="id1" class="classA">An element with a touch of class.</div>
+    <input type="button" id="btn1" value="Toggle" />
+</body>
+</html>
