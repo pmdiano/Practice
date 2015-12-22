@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Switching Stylesheets with JavaScript</title>
+    <style>
+        body {
+            background-color: white;
+            color: red;
+            font: normal 24px arial, helvetica, sans-serif;
+            padding: 20px;
+        }
+    </style>
+    <style>
+        body {
+            background-color: black;
+            color: yellow;
+            font: italic bold 24px "Times New Roman", serif;
+            padding: 20px;
+        }
+    </style>
+    <script>
+        var whichSheet = 0;
+        document.styleSheets[1].disabled = true;
+        function sheet() {
+            document.styleSheets[whichSheet].disabled = true;
+            whichSheet = 1 - whichSheet;
+            document.styleSheets[whichSheet].disabled = false;
+        }
+        window.onload = function() {
+            document.getElementById("btn1").onclick = sheet;
+        }
+    </script>
+</head>
+<body>
+    Switch my stylesheet with the button below!<br/>
+    <input type="button" id="btn1" value="Toggle"/>
+</body>
+</html>
