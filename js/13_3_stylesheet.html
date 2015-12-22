@@ -18,6 +18,17 @@
             padding: 20px;
         }
     </style>
+    <style>
+        .btnclass {
+            padding: 15px;
+            background-image: linear-gradient(#FC6E51, #FFF);
+            background-size: auto 200%;
+            background-position: 0 100%;
+        }
+        .btnclass:hover {
+            background-position: 0 0;
+        }
+    </style>
     <script>
         var whichSheet = 0;
         document.styleSheets[1].disabled = true;
@@ -33,6 +44,6 @@
 </head>
 <body>
     Switch my stylesheet with the button below!<br/>
-    <input type="button" id="btn1" value="Toggle"/>
+    <input type="button" class="btnclass" id="btn1" value="Toggle"/>
 </body>
 </html>
