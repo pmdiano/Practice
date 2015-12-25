@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajax Form Submission</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+        $(document).ready(function(){
+            function checkFields(){
+                return ($("#name").val() && $("#email").val());
+            }
+            $("#form1").submit(function(event){
+                if(checkFields()){
+                    // Stop form from submitting normally
+                    event.preventDefault();
+
+                    $.post('form.php', $("#form1").serialize())
+                        .done(function(data){
+                            $("#div1").html(data);
+                        });
+                } else {
+                    alert("Please fill in name and email fields!");
+                    return false;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <form id="form1">
+        Name<input type="text" name="name" id="name"><br />
+        Email<input type="text" name="email" id="email"><br />
+        <input type="submit" name="submit" id="submit" value="Submit Form">
+    </form>
+    <div id="div1"></div>
+</body>
+</html>
