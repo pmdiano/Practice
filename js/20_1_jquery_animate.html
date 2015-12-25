@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #animateMe {
+            position:absolute;
+            width: 100px;
+            height: 400px;
+            top: 100px;
+            left: 100px;
+            border: 2px solid black;
+            background-color: yellow;
+            padding: 20px;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#animateMe").text("Changing shape...").animate(
+                {
+                    width: "400px",
+                    height: "200px"
+                }, 5000, function() {
+                    $(this).text("Fading away...").fadeOut(4000);
+                }
+            );
+        });
+    </script>
+</head>
+<body>
+    <div id="animateMe"></div>
+</body>
+</html>
