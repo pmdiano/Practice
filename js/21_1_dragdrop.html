@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" />
+    <style>
+        div {
+            font: 12px normal arial, helvetica;
+        }
+        #dragdiv {
+            width: 150px;
+            height: 50px;
+            background-color: #eeffee;
+            border: 1px solid black;
+            padding: 5px;
+        }
+        #dropdiv {
+            position: absolute;
+            top: 80px;
+            left: 100px;
+            width: 300px;
+            height: 200px;
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+    <title>Drag and Drop</title>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $("#dragdiv").draggable();
+            $("#dropdiv").droppable({
+                drop: function() {$("#dragdiv").text("Dropped!");},
+                out: function() {$("#dragdiv").text("Off and running again ...");}
+            }).resizable();
+        });
+    </script>
+</head>
+<body>
+    <div id="dropdiv">This is the drop zone ...</div>
+    <div id="dragdiv">Drag this element around the page!</div>
+</body>
+</html>
