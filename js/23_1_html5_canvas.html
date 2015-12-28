@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML5 canvas</title>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+</head>
+<script>
+    var context;
+    var x0=300;
+    var y0=200;
+    var rx=150;
+    var ry=100;
+    var x, y;
+    var counter=0;
+    var speed=0.3;  // rounds per second
+    var freq=30;    // refreshing frequency
+
+    function paint() {
+        context.beginPath();
+        context.fillStyle="#00ff00";
+        context.arc(x, y, 15, 0, Math.PI*2, false);
+        context.closePath();
+        context.fill();
+    }
+    function animate() {
+        context.clearRect(0, 0, 800, 600);
+        x = x0 + rx * Math.sin(counter * Math.PI * 2 * speed / freq);
+        y = y0 + ry * Math.cos(counter * Math.PI * 2 * speed / freq);
+        paint();
+        counter++;
+    }
+    $(function(){
+        context = canvas1.getContext('2d');
+        setInterval(animate, 1000/freq);
+    })
+</script>
+<body>
+    <canvas id="canvas1" width="800" height="600">
+        <p>Your browser doesn't support the canvas element.</p>
+    </canvas>
+</body>

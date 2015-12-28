@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML5 Local Files</title>
+    <style type="text/css">
+        body {background-color: #ddd; font-family: arial, verdana, sans-serif;}
+        #drop1 {width:400px; height:200px; border:1px solid black; background-color: white}
+    </style>
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drop(ev) {
+            var files = ev.dataTransfer.files;
+            for (var i=0; i<files.length; i++) {
+                var f = files[i];
+                var pnode = document.createElement("p");
+                var tnode = document.createTextNode(f.name + " (" + f.type + ") " + f.size + " bytes");
+                pnode.appendChild(tnode);
+                ev.target.appendChild(pnode);
+            }
+            ev.preventDefault();
+        }
+
+        window.onload = function() {
+            if (!window.File || !window.FileReader || !window.FileList) {
+                alert("Local File not supported");
+            }
+            var drophere = document.getElementById("drop1");
+            drophere.ondragover = allowDrop;
+            drophere.ondrop = drop;
+        }
+    </script>
+</head>
+<body>
+    <div id="drop1" ></div>
+    <output id="text"></output>
+</body>
+</html>

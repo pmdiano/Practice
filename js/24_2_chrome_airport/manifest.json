@@ -1,0 +1,15 @@
+{
+  "name": "Airport Information",
+  "version": "0.1",
+  "description": "Information on US airports.",
+  "browser_action": {
+    "default_icon": "plane.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "https://services.faa.gov/",
+    "https://code.jquery.com/"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://code.jquery.com/; object-src 'self'"
+}
