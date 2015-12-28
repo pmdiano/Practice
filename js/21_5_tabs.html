@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" />
+    <title>Tabs</title>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+        $(function(){
+            $( "#tabs" ).tabs();
+        });
+    </script>
+</head>
+<body>
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Home</a></li>
+            <li><a href="#tabs-2">About Us</a></li>
+            <li><a href="#tabs-3">Products</a></li>
+        </ul>
+        <div id="tabs-1">
+            <p>Hello</p>
+        </div>
+        <div id="tabs-2">
+            <p>Hi</p>
+        </div>
+        <div id="tabs-3">
+            <p>Hey</p>
+        </div>
+    </div>
+</body>
+</html>
