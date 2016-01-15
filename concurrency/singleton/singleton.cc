@@ -67,10 +67,10 @@ public:
 
 protected:
   Singleton3() {
-    printf("Singleton3 = 0x%08x created\n", this);
+    printf("Singleton3 = 0x%016llx created\n", (uint64_t)this);
   }
   ~Singleton3() {
-    printf("Singleton3 = 0x%08x deleted\n", this);
+    printf("Singleton3 = 0x%016llx deleted\n", (uint64_t)this);
   }
 
 private:
@@ -100,7 +100,7 @@ T* Singleton3<T>::m_pInstance = nullptr;
 class Singleton30 : public Singleton3<Singleton30> {
 public:
   void hello() {
-    printf("Hello from Singleton30 = 0x%08x\n", this->GetInstance());
+    printf("Hello from Singleton30 = 0x%016llx\n", (uint64_t)this->GetInstance());
   }
 };
 
@@ -126,17 +126,17 @@ public:
 
 protected:
   Singleton4() {
-    printf("Singleton4 = 0x%08x created\n", this);
+    printf("Singleton4 = 0x%016llx created\n", (uint64_t)this);
   }
   ~Singleton4() {
-    printf("Singleton4 = 0x%08x created\n", this);
+    printf("Singleton4 = 0x%016llx deleted\n", (uint64_t)this);
   }
 
 private:
   Singleton4(const Singleton4& rhs);
   Singleton4& operator=(const Singleton4& rhs);
 
-  void Destroy() {
+  void static Destroy() {
     if (m_pInstance)
       delete m_pInstance;
     m_pInstance = nullptr;
@@ -155,7 +155,7 @@ mutex Singleton4<T>::m_mutex;
 class Singleton40 : public Singleton4<Singleton40> {
 public:
   void hello() {
-    printf("Hello from Singleton40 = 0x%08x\n", &GetInstance());
+    printf("Hello from Singleton40 = 0x%016llx\n", (uint64_t)&GetInstance());
   }
 };
 
