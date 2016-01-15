@@ -104,6 +104,7 @@ public:
   }
 };
 
+template<>
 Singleton3<Singleton30>::Garbo Singleton3<Singleton30>::garbo;
 
 /**
