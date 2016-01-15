@@ -3,11 +3,16 @@
 #include <iostream>
 using namespace std;
 
+/**
+ * JSON pretty print. Assuems the input is a valid JSON string.
+ * @param  str [Input JSON string]
+ * @return     [Output beautified version]
+ */
 string JSON_pretty_print(string str) {
   string output = "{\n";
   int tab_size = 2;
   int indent = tab_size;
-  const char *pc = str.c_str() + 1;
+  const char *pc = str.c_str() + 1; // assumes str[0] is '{'
 
   while (*pc) {
     // remove whitespace
@@ -17,7 +22,7 @@ string JSON_pretty_print(string str) {
 
     if (*pc == '"') { // string
       pc++;
-      if (output[output.length()-1] == '\n') {
+      if (output[output.length()-1] == '\n') { // ugly
         output += string(indent, ' ');
       }
       output += '"';
@@ -48,7 +53,7 @@ string JSON_pretty_print(string str) {
         pc += 4;
       }
     } else if (*pc == '{' || *pc == '[') { // object or array start
-      if (output[output.length()-1] == '\n') {
+      if (output[output.length()-1] == '\n') { // ugly
         output += string(indent, ' ');
       }
       output += *pc++;
