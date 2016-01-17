@@ -8,70 +8,68 @@ using namespace std;
  * @param  str [Input JSON string]
  * @return     [Output beautified version]
  */
-string JSON_pretty_print(string str) {
-  string output = "{\n";
-  int tab_size = 2;
-  int indent = tab_size;
-  const char *pc = str.c_str() + 1; // assumes str[0] is '{'
+string JSON_pretty_print(string input) {
+  string output;
+  int indent = 0;
+  bool new_line = false;
+  const int tab_size = 2;
+  const char *pc = input.c_str() - 1;
 
-  while (*pc) {
-    // remove whitespace
-    while (*pc == ' ' || *pc == '\n' || *pc == '\t') {
-      ++pc;
+  while (*++pc) {
+    if (*pc == ' ' || *pc == '\t' || *pc == '\n') {
+      continue;
     }
 
-    if (*pc == '"') { // string
-      pc++;
-      if (output[output.length()-1] == '\n') { // ugly
-        output += string(indent, ' ');
-      }
-      output += '"';
-      while (*pc != '"') {
-        output += *pc++;
-      }
-      pc++;
-      output += '"';
-    } else if (*pc == ':') { // : between key and value
-      pc++;
-      output += ": ";
-    } else if (*pc ==',' ) { // next record
-      pc++;
-      output += ",\n";
-    } else if (*pc == '-' || *pc >= '0' && *pc <= '9') { // number
-      while (*pc == '-' || *pc == '.' || *pc == 'e' || *pc >= '0' && *pc <= '9') {
-        output += *pc++;
-      }
-    } else if (*pc == 't' || *pc == 'f' || *pc == 'n') { // true, false, null
-      if (*pc == 't') {
-        output += "true";
-        pc += 4;
-      } else if (*pc == 'f') {
-        output += "false";
-        pc += 5;
-      } else if (*pc == 'n') {
-        output += "null";
-        pc += 4;
-      }
-    } else if (*pc == '{' || *pc == '[') { // object or array start
-      if (output[output.length()-1] == '\n') { // ugly
-        output += string(indent, ' ');
-      }
-      output += *pc++;
+    if (new_line) {
       output += '\n';
+      output += string(indent, ' ');
+    }
+
+    if (*pc == '{' || *pc == '[') {
+      output += *pc;
+      new_line = true;
       indent += tab_size;
-    } else if (*pc == '}' || *pc == ']') { // object or array end
+      continue;
+    }
+
+    if (*pc == ',') {
+      output += *pc;
+      new_line = true;
+      continue;
+    }
+
+    new_line = false;
+
+    if (*pc == '}' || *pc == ']') {
       output += '\n';
       indent -= tab_size;
       output += string(indent, ' ');
-      output += *pc++;
+      output += *pc;
+      continue;
     }
+
+    if (*pc == '"') {
+      output += '"';
+      while (*++pc != '"') {
+        output += *pc;
+      }
+      output += '"';
+      continue;
+    }
+
+    if (*pc == ':') {
+      output += ": ";
+      continue;
+    }
+
+    output += *pc;
   }
 
   return output;
 }
 
 int main() {
-  string input = "{  \"firstName\": \"John\","
+  string input = "{  \"firstName\": \"John\",\n\n"
           "\"lastName\": \"Smith\",  \"age\": 25,   "
           "\"address\": {    \"streetAddress\": "
           "\"21 2nd Street\",    \"city\": \"New York\",    "
@@ -81,6 +79,6 @@ int main() {
           "\"type\": \"fax\",      \"number\": \"646 555-4567\""
           "}  ],  \"gender\": {    \"type\": \"male\"  }, "
           "\"healthy\": true,  \"wife\": null}";
-  cout << JSON_pretty_print(input);
+  cout << JSON_pretty_print(input) << endl;;
   return 0;
 }
