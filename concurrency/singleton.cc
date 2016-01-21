@@ -154,6 +154,11 @@ template <typename T>
 mutex Singleton4<T>::m_mutex;
 
 class Singleton40 : public Singleton4<Singleton40> {
+  friend class Singleton4;
+  Singleton40() {}
+  ~Singleton40() {}
+  Singleton40(const Singleton40& other);
+  Singleton40 operator=(const Singleton40& other);
 public:
   void hello() {
     printf("Hello from Singleton40 = 0x%016llx\n", (uint64_t)&GetInstance());
@@ -162,12 +167,8 @@ public:
 
 int main() {
   auto& s1 = Singleton1::GetInstance();
-
   auto& s2 = Singleton20::GetInstance();
-
   Singleton30::GetInstance()->hello();
-
   Singleton40::GetInstance().hello();
-
   return 0;
 }
