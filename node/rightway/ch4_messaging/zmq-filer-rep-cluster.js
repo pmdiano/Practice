@@ -27,6 +27,12 @@ if (cluster.isMaster) {
     console.log('Worker ' + worker.process.pid + ' is online.');
   });
 
+  cluster.on('exit', function (worker, code, signal) {
+    console.log('worker %d died (%s). restarting...',
+      worker.process.pid, signal || code);
+    cluster.fork();
+  });
+
   // fork three worker processes
   for (let i = 0; i < 3; i++) {
     cluster.fork();
