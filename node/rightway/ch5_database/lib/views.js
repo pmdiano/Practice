@@ -8,6 +8,15 @@ module.exports = {
     reduce: '_count'
   },
 
+  by_title: {
+    map: function (doc) {
+      if ('title' in doc) {
+        emit(doc.title);
+      }
+    }.toString(),
+    reduce: '_count'
+  },
+
   by_subject: {
     map: function(doc) {
       if ('subjects' in doc) {
