@@ -29,8 +29,8 @@ const
   RedisStore = require('connect-redis')(session),
   
   GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
-  GOOGLE_CLIENT_ID = "834935772635-ngfpqhkj2m17ohofoqdi3rm82bkbqma8.apps.googleusercontent.com",
-  GOOGLE_CLIENT_SECRET = "RbhAH7EKBTNBTfDpwAg_G0-_";
+  GOOGLE_CLIENT_ID = "_put_your_client_id_here_",
+  GOOGLE_CLIENT_SECRET = "_put_your_secret_here";
 
 redisClient
   .on('ready', function() { log.info('REDIS', 'ready'); })
