@@ -1,2 +1,2 @@
-# Learning
-My learnings on some basic languages & tools.
+# Practice
+Just a repo for learning and practice.
