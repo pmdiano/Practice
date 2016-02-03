@@ -19,12 +19,11 @@ condition_variable cv, cv_main;
 vector<thread> threads(total);
 
 void thread_func(int count, int idx, char msg) {
+  unique_lock<mutex> lock(mtx);
+  ++ready;
+  cv_main.notify_one();
+
   while (count--) {
-    unique_lock<mutex> lock(mtx);
-
-    ++ready;
-    cv_main.notify_one();
-
     cv.wait(lock, [&]() -> bool {
       return now == idx;
     });
