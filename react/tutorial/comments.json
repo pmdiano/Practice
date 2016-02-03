@@ -22,5 +22,27 @@
         "type": "male"
     },
     "healthy": true,
-    "wife": null
+    "wife": null,
+    "comments": [
+        {
+            "id": 1388534400000,
+            "author": "Qirong Ma",
+            "text": "Hey there!"
+        },
+        {
+            "id": 1420070400000,
+            "author": "Kuaiji Liu",
+            "text": "React is *great*!"
+        },
+        {
+            "id": 1454479715936,
+            "author": "Yishen Dong",
+            "text": "Node is *great* as well!"
+        },
+        {
+            "id": 1454479751394,
+            "author": "Jiaoshou Ma",
+            "text": "JS is cool!"
+        }
+    ]
 }
