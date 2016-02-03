@@ -13,13 +13,18 @@ using namespace std;
 
 static const int total = 7;
 int now = -1;
+int ready = 0;
 mutex mtx;
-condition_variable cv;
+condition_variable cv, cv_main;
 vector<thread> threads(total);
 
 void thread_func(int count, int idx, char msg) {
   while (count--) {
     unique_lock<mutex> lock(mtx);
+
+    ++ready;
+    cv_main.notify_one();
+
     cv.wait(lock, [&]() -> bool {
       return now == idx;
     });
@@ -32,7 +37,7 @@ void thread_func(int count, int idx, char msg) {
 
     cout << msg;
     ++now %= total;
-    cv.notify_one();
+    cv.notify_all();
   }
 }
 
@@ -41,12 +46,22 @@ int main(void) {
     threads[i] = thread(thread_func, 10, i, 'A'+i);
   }
 
-  now = 0;
-  cv.notify_one();
+  {
+    // wait until all workers are ready
+    unique_lock<mutex> lock(mtx);
+    cv_main.wait(lock, [&]() -> bool {
+      return ready == total;
+    });
+
+    // now they're all ready, fire
+    now = 0;
+    cv.notify_all();
+  }
 
   for (auto &t : threads) {
     t.join();
   }
 
+  cout << endl;
   return 0;
 }
