@@ -1,0 +1,27 @@
+{
+  "always_show_minimap_viewport": true,
+  "bold_folder_labels": true,
+  "color_scheme": "Packages/User/Color Highlighter/themes/itg.dark.tmTheme",
+  "icon_file_type_enable": true,
+  "ignored_packages":
+  [
+    "C++",
+    "Vintage"
+  ],
+  "indent_guide_options":
+  [
+    "draw_normal",
+    "draw_active"
+  ],
+  "line_padding_bottom": 1,
+  "line_padding_top": 0,
+  "material_theme_compact_sidebar": true,
+  "material_theme_contrast_mode": true,
+  "material_theme_panel_separator": true,
+  "material_theme_small_statusbar": true,
+  "material_theme_small_tab": true,
+  "material_theme_tabs_autowidth": true,
+  "material_theme_tree_headings": true,
+  "overlay_scroll_bars": "enabled",
+  "theme": "Material-Theme.sublime-theme"
+}
