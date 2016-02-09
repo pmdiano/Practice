@@ -4,4 +4,5 @@
 *.swp
 *.rdf
 *.txt
+*.DS_Store
 node/rightway/ch6_webservices/b4/bower_components
