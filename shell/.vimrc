@@ -1,0 +1,11 @@
+filetype on
+set autoindent
+set cindent
+set smartindent
+set nocompatible
+set nu!
+set ruler
+set tabstop=2
+set shiftwidth=2
+set expandtab
+syntax on
