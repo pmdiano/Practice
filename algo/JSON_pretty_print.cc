@@ -1,5 +1,7 @@
 #include <string>
 #include <iostream>
+#include <sstream>
+#include <fstream>
 using namespace std;
 
 /**
@@ -67,17 +69,27 @@ string JSON_pretty_print(string input) {
   return output;
 }
 
-int main() {
-  string input = "{  \"firstName\": \"John\",\n\n"
-          "\"lastName\": \"Smith\",  \"age\": 25,   "
-          "\"address\": {    \"streetAddress\": "
-          "\"21 2nd Street\",    \"city\": \"New York\",    "
-          "\"state\": \"NY\",    \"postalCode\": \"10021\"  },  "
-          "\"phoneNumber\": [    {      \"type\": \"home\",      "
-          "\"number\": \"212 555-1234\"    },    {      "
-          "\"type\": \"fax\",      \"number\": \"646 555-4567\""
-          "}  ],  \"gender\": {    \"type\": \"male\"  }, "
-          "\"healthy\": true,  \"wife\": null}";
-  cout << JSON_pretty_print(input) << endl;;
+int main(int argc, char *argv[]) {
+  if (argc == 1) {
+    string input =
+      "{  \"firstName\": \"John\",\n\n"
+      "\"lastName\": \"Smith\",  \"age\": 25,   "
+      "\"address\": {    \"streetAddress\": "
+      "\"21 2nd Street\",    \"city\": \"New York\",    "
+      "\"state\": \"NY\",    \"postalCode\": \"10021\"  },  "
+      "\"phoneNumber\": [    {      \"type\": \"home\",      "
+      "\"number\": \"212 555-1234\"    },    {      "
+      "\"type\": \"fax\",      \"number\": \"646 555-4567\""
+      "}  ],  \"gender\": {    \"type\": \"male\"  }, "
+      "\"healthy\": true,  \"wife\": null}";
+    cout << JSON_pretty_print(input) << endl;
+  } else {
+    for (int i = 1; i < argc; ++i) {
+      ifstream t(argv[i]);
+      stringstream buffer;
+      buffer << t.rdbuf();
+      cout << JSON_pretty_print(buffer.str()) << endl;
+    }
+  }
   return 0;
 }
