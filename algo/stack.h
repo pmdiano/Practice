@@ -24,16 +24,20 @@ class Stack {
       if (!_buffer) {
         throw std::bad_alloc();
       }
+
       _capacity = _SIZE0;
     } else if (_size == _capacity) {
       if (_capacity >> 31) {
         throw std::overflow_error("Stack overflow");
       }
+
       T* buffer2 = new (std::nothrow) T[_capacity * 2];
       if (!buffer2) {
         throw std::bad_alloc();
       }
+
       memcpy(buffer2, _buffer, _size * sizeof(T));
+
       delete[] _buffer;
       _buffer = buffer2;
       _capacity *= 2;
@@ -65,14 +69,16 @@ public:
     if (empty()) {
       throw std::underflow_error("Popping empty stack");
     }
+
     _size--;
     return _buffer[_size];
   }
 
   T& top() {
     if (empty()) {
-      throw std::underflow_error("Toppong empty stack");
+      throw std::underflow_error("Getting top of empty stack");
     }
+
     return _buffer[_size - 1];
   }
 
