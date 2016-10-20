@@ -7,6 +7,29 @@
 #include <utility>
 
 template<typename T>
+void insertionSort(T* A, int p, int r) {
+    for (int i = p+1; i <= r; i++) {
+        T x = A[i];
+        int j = i;
+        for (; j-1 >= 0 && A[j-1] > x; j--) {
+            A[j] = A[j-1];
+        }
+        A[j] = x;
+    }
+}
+
+template<typename T>
+void bubbleSort(T* A, int p, int r) {
+    for (int i = p+1; i <= r; i++) {
+        for (int j = r; j >= i; j--) {
+            if (A[j-1] > A[j]) {
+                std::swap(A[j-1], A[j]);
+            }
+        }
+    }
+}
+
+template<typename T>
 int partition(T* A, int p, int r) {
     T x = A[r];
     int i = p-1;
@@ -88,6 +111,102 @@ void mergeSort(T* A, int p, int r) {
         mergeSort(A, p, q);
         mergeSort(A, q+1, r);
         merge(A, p, q, r);
+    }
+}
+
+template<typename T>
+class MaxHeap {
+    T* data;
+    int capacity;
+    int size;
+    bool hasOwnData;
+
+    inline int parent(int i) {
+        return (i-1) / 2;
+    }
+
+    inline int lson(int i) {
+        return 2*i+1;
+    }
+
+    inline int rson(int i) {
+        return 2*i+2;
+    }
+
+    void siftUp(int i) {
+        for (;;) {
+            int j = parent(i);
+            if (j < 0 || data[j] >= data[i]) {
+                break;
+            }
+            std::swap(data[j], data[i]);
+            i = j;
+        }
+    }
+
+    void siftDown(int i) {
+        for (;;) {
+            int j = lson(i);
+            if (rson(i) < size && data[rson(i)] > data[j]) {
+                j = rson(i);
+            }
+            if (j >= size || data[i] >= data[j]) {
+                break;
+            }
+            std::swap(data[i], data[j]);
+            i = j;
+        }
+    }
+
+public:
+    MaxHeap(T* A, int p, int r)
+        : data(A+p)
+        , capacity(r-p+1)
+        , size(r-p+1)
+        , hasOwnData(false) {
+        for (int i = size/2 - 1; i >= 0; i--) {
+            siftDown(i);
+        }
+    }
+
+    MaxHeap()
+        : capacity(100)
+        , size(0)
+        , hasOwnData(true) {
+        data = (T*)malloc(capacity*sizeof(T));
+    }
+
+    ~MaxHeap() {
+        if (hasOwnData) {
+            free(data);
+        }
+    }
+
+    T pop() {
+        std::swap(data[0], data[--size]);
+        siftDown(0);
+        return data[size];
+    }
+
+    void push(T x) {
+        if (size == capacity) {
+            data = (T*)realloc(data, 2*capacity*sizeof(T));
+            capacity *= 2;
+        }
+        data[size++] = x;
+        siftUp(size-1);
+    }
+
+    bool empty() {
+        return size == 0;
+    }
+};
+
+template<typename T>
+void heapSort(T* A, int p, int r) {
+    MaxHeap<T> heap(A, p, r);
+    while (!heap.empty()) {
+        heap.pop();
     }
 }
 

@@ -18,7 +18,7 @@ void print_vec(const std::vector<int>& vec) {
         return;
     }
     printf("[%d", vec[0]);
-    for (int i = 1; i < vec.size(); i++) {
+    for (int i = 1; i < (int)vec.size(); i++) {
         printf(", %d", vec[i]);
     }
     printf("]\n");

@@ -4,27 +4,28 @@
 #include "myutil.h"
 using namespace std;
 
-int main() {
-    vector<int> A(20);
-    for (int i = 0; i < A.size(); i++) {
-        A[i] = i%15 + 1;
-    }
-
-    shuffle(&A[0], 0, A.size()-1);
+template<typename T>
+void testSort(vector<int>& A, void (*pfn)(T*, int, int), const char* name) {
+    shuffle(&A[0], 0, A.size() - 1);
     printf("Original: ");
     print_vec(A);
 
-    quickSort(&A[0], 0, A.size()-1);
-    printf("Quick sort: ");
+    pfn(&A[0], 0, A.size()-1);
+    printf("%s: ", name);
     print_vec(A);
+}
 
-    shuffle(&A[0], 0, A.size()-1);
-    printf("\nOriginal: ");
-    print_vec(A);
+int main() {
+    vector<int> A(20);
+    for (int i = 0; i < (int)A.size(); i++) {
+        A[i] = i%15 + 1;
+    }
 
-    mergeSort(&A[0], 0, A.size()-1);
-    printf("Merge sort: ");
-    print_vec(A);    
+    testSort<int>(A, bubbleSort, "Bubble sort"); printf("\n");
+    testSort<int>(A, insertionSort, "Insertion sort"); printf("\n");
+    testSort<int>(A, quickSort, "Quick sort"); printf("\n");
+    testSort<int>(A, mergeSort, "Merge sort"); printf("\n");
+    testSort<int>(A, heapSort, "Heap sort"); printf("\n");
 
     shuffle(&A[0], 0, A.size()-1);
     printf("\nOriginal: ");
