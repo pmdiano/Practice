@@ -10,3 +10,4 @@
 *.aux
 
 *.dSYM
+*.DS_Store

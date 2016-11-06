@@ -7,6 +7,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <arpa/inet.h>
 #include <errno.h>
 
 #define MAXLINE 1024

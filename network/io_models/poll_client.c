@@ -2,6 +2,7 @@
  * Copied from
  * http://www.cnblogs.com/Anker/p/3261006.html
  */
+#include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <stdio.h>
