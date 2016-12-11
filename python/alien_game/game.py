@@ -30,11 +30,25 @@ class Game():
     def run_loop(self):
         while True:
             self.__check_events()
-            self.__ship.update()
-            self.__update_aliens()
-            self.__update_bullets()
-            self.__handle_collision()
+
+            if self.__stats.game_active:
+                self.__ship.update()
+                self.__update_aliens()
+                self.__update_bullets()
+
             self.__update_screen()
+            self.__handle_collision()
+            self.__check_aliens_bottom()
+
+    def __check_events(self):
+        """Respond to keypresses and mouse events."""
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                self.__check_keydown_events(event)
+            elif event.type == pygame.KEYUP:
+                self.__check_keyup_events(event)
 
     def __check_keydown_events(self, event):
         """Respond to keypresses."""
@@ -53,16 +67,6 @@ class Game():
             self.__ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.__ship.moving_left = False
-
-    def __check_events(self):
-        """Respond to keypresses and mouse events."""
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                self.__check_keydown_events(event)
-            elif event.type == pygame.KEYUP:
-                self.__check_keyup_events(event)
 
     def __update_screen(self):
         """Update images on the screen and flip to the new screen."""
@@ -159,6 +163,17 @@ class Game():
         self.__check_fleet_edges()
         self.__aliens.update()
 
+    def __check_aliens_bottom(self):
+        """
+        Check if any aliens have reached the bottom of the screen.
+        """
+        screen_rect = self.__screen.get_rect()
+        for alien in self.__aliens.sprites():
+            if alien.rect.bottom >= screen_rect.bottom:
+                # Treat this the same as if thes hip got hit
+                self.__ship_hit()
+                break
+
     def __handle_collision(self):
         # Look for alien-ship collisions.
         if pygame.sprite.spritecollideany(self.__ship, self.__aliens):
@@ -174,8 +189,11 @@ class Game():
 
     def __ship_hit(self):
         """Respond to ship being hit by alien."""
-        # Decrement ships_left
-        self.__stats.ships_left -= 1
+        if self.__stats.ships_left > 1:
+            # Decrement ships_left
+            self.__stats.ships_left -= 1
+        else:
+            self.__stats.game_active = False
 
         # Empty the list of aliens and bullets
         self.__aliens.empty()
@@ -187,3 +205,6 @@ class Game():
 
         # Pause.
         sleep(0.5)
+
+        print("Hit! ships left = %d, aliens = %d" % (
+            self.__stats.ships_left, len(self.__aliens)))
