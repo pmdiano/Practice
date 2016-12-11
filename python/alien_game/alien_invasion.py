@@ -1,38 +1,22 @@
 import sys
 import pygame
-import game_functions as gf
-from pygame.sprite import Group
+from game import Game
 from settings import Settings
-from game_stats import GameStats
-from ship import Ship
 
 def run_game():
-    # Initialize game
+    # Initialize pygame
     pygame.init()
-    
+
+    # Create settings and screen
     ai_settings = Settings()
     screen = pygame.display.set_mode(
         (ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Alien Invasion")
 
-    # Create an instance to store game statistics
-    stats = GameStats(ai_settings)
-
-    # Make a ship, a group of bullets, and a group of aliens.
-    ship = Ship(ai_settings, screen)
-    bullets = Group()
-    aliens = Group()
-
-    # Create the fleet of aliens
-    gf.create_fleet(ai_settings, screen, ship, aliens)
+    # Create the game
+    game = Game(ai_settings, screen)
 
     # Start the main loop for the game:
-    while True:
-        gf.check_events(ai_settings, screen, ship, bullets)
-        ship.update()
-        gf.update_aliens(ai_settings, aliens)
-        gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
-        gf.handle_collision(ai_settings, stats, screen, ship, aliens, bullets)
-        gf.update_screen(ai_settings, screen, ship, aliens, bullets)
+    game.run_loop()
 
 run_game()
