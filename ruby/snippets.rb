@@ -84,3 +84,18 @@ a.inject(0) do |sum, i|
   puts "sum: #{sum} i: #{i} sum + i: #{sum + i}"
   sum + i
 end
+
+# StringIO library
+require 'stringio'
+out = StringIO()
+puts out.string
+
+# type checking
+if not obj.kind_of?(String)
+  raise TypeError, "not a string"
+end
+
+# method checking
+if not obj.respond_to?("to_str")
+  raise TypeError, "not a string"
+end
