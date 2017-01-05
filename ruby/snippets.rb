@@ -119,3 +119,22 @@ end
 
 puts Roman.X
 puts Roman.XII
+
+# Regex and hash table
+date = {}
+ARGF.each do |line|
+  if /\d\d\/[A-Z][a-z][a-z]\/\d\d/ =~ line
+    date[$&] ||= Hash.new(0)
+    dic = date[$&]
+    if /GET ([^ ]+) HTTP/ =~ line
+      dic[$1] += 1
+    end
+  end
+end
+printf "%15s %s\n", "IP addr", "num"
+date.keys.sort.each do |d|
+  puts d
+  date[d].sort_by{|k,v| -v}[0..2].each do |url, n|
+    printf "%-25s %d\n", url, n
+  end
+end
