@@ -138,3 +138,8 @@ date.keys.sort.each do |d|
     printf "%-25s %d\n", url, n
   end
 end
+
+# each_with_object and letter usage
+(0..23).each_with_object(foo) do |i, h|
+  letter = (i+?c.ord).chr
+end
