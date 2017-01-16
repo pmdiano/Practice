@@ -143,3 +143,23 @@ end
 (0..23).each_with_object(foo) do |i, h|
   letter = (i+?c.ord).chr
 end
+
+# usage of STDIN and map function
+STDIN.each_line do |line|
+  val = line
+  year, temp, q = val[15,4], val[87,5], val[92,1]
+  puts "#{year}\t#{temp}" if (temp != "+9999" && q =~ /[01459]/)
+end
+
+# reduce function
+last_key, max_val = nil, -1000000
+STDIN.each_line do |line|
+  key, val = line.split("\t")
+  if last_key && last_key != key
+    puts "#{last_key}\t#{max_val}"
+    last_key, max_val = key, val.to_i
+  else
+    last_key, max_val = key, [max_val, val.to_i].max
+  end
+end
+puts "#{last_key}\t#{max_val}" if last_key
