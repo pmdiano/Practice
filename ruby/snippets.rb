@@ -163,3 +163,19 @@ STDIN.each_line do |line|
   end
 end
 puts "#{last_key}\t#{max_val}" if last_key
+
+# Prime number and step
+sieve = []
+max = 100
+for i in 2 .. max
+  sieve[i] = i
+end
+
+for i in 2 .. Math.sqrt(max)
+  next unless sieve[i]
+  (i*i).step(max, i) do |j|
+    sieve[j] = nil
+  end
+end
+
+puts sieve.compact.join(", ")
