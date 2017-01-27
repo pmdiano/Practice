@@ -179,3 +179,12 @@ for i in 2 .. Math.sqrt(max)
 end
 
 puts sieve.compact.join(", ")
+
+# What is $!?
+begin
+  opts.parse(ARGV)
+  raise OptionParser::MissingArgument if some_parameter.nil?
+  # Some other code
+rescue OptionParser::InvalidOption, OptionParser::MissingArgument
+  raise $!.to_s
+end
