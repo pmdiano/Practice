@@ -188,3 +188,16 @@ begin
 rescue OptionParser::InvalidOption, OptionParser::MissingArgument
   raise $!.to_s
 end
+
+# Ruby profiler: ruby -rprofile
+
+# Benchmark module
+require 'benchmark'
+
+a = (1..10000).collect{rand(1000)}
+b = (1..10000).collect{rand(1000)}
+
+Benchmark.bm do |x|
+  x.report { intersect1(a, b) }
+  x.report { intersect2(a, b) }
+end
