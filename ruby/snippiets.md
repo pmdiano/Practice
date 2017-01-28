@@ -1,15 +1,20 @@
-# array
+- array
+```ruby
 [1].class
 [1].methods.include?(:[])
+```
 
-# hashtable
+- hashtable
+```ruby
 numbers = {1 => 'one', 2 => 'two'}
 numbers[1]
 numbers[2]
 stuff = {:array => [1, 2, 3], :string => 'Hi, mom!'}    # symbol
 stuff[:string]
+```
 
-# function
+- function
+```ruby
 def tell_the_truth(options={})
     if options[:profession] == :lawyer
         'it could be believed that this is almost certainly not false.'
@@ -19,8 +24,10 @@ def tell_the_truth(options={})
 end
 tell_the_truth
 tell_the_truth :profession => :lawyer
+```
 
-# class
+- class
+```ruby
 class Tree
   attr_accessor :children, :node_name
 
@@ -47,8 +54,10 @@ puts
 
 puts "Visiting entire tree"
 ruby_tree.visit_all {|node| puts node.node_name}
+```
 
-# mixin
+- mixin
+```ruby
 module ToFile
   def filename
     "object_#{self.object_id}.txt"
@@ -70,8 +79,10 @@ class Person
     name
   end
 end
+```
 
-# some array functions
+- some array functions
+```ruby
 a = [5, 3, 4, 1]
 a.sort
 a.any? {|i| i > 6}
@@ -84,23 +95,31 @@ a.inject(0) do |sum, i|
   puts "sum: #{sum} i: #{i} sum + i: #{sum + i}"
   sum + i
 end
+```
 
-# StringIO library
+- StringIO library
+```ruby
 require 'stringio'
 out = StringIO()
 puts out.string
+```
 
-# type checking
+- type checking
+```ruby
 if not obj.kind_of?(String)
   raise TypeError, "not a string"
 end
+```
 
-# method checking
+- method checking
+```ruby
 if not obj.respond_to?("to_str")
   raise TypeError, "not a string"
 end
+```
 
-# method_missing to implement Roman number!!
+- method_missing to implement Roman number!!
+```ruby
 class Roman
   def self.method_missing name, *args
     roman = name.to_s
@@ -119,8 +138,10 @@ end
 
 puts Roman.X
 puts Roman.XII
+```
 
-# Regex and hash table
+- Regex and hash table
+```ruby
 date = {}
 ARGF.each do |line|
   if /\d\d\/[A-Z][a-z][a-z]\/\d\d/ =~ line
@@ -138,20 +159,26 @@ date.keys.sort.each do |d|
     printf "%-25s %d\n", url, n
   end
 end
+```
 
-# each_with_object and letter usage
+- each_with_object and letter usage
+```ruby
 (0..23).each_with_object(foo) do |i, h|
   letter = (i+?c.ord).chr
 end
+```
 
-# usage of STDIN and map function
+- usage of STDIN and map function
+```ruby
 STDIN.each_line do |line|
   val = line
   year, temp, q = val[15,4], val[87,5], val[92,1]
   puts "#{year}\t#{temp}" if (temp != "+9999" && q =~ /[01459]/)
 end
+```
 
-# reduce function
+- reduce function
+```ruby
 last_key, max_val = nil, -1000000
 STDIN.each_line do |line|
   key, val = line.split("\t")
@@ -163,8 +190,10 @@ STDIN.each_line do |line|
   end
 end
 puts "#{last_key}\t#{max_val}" if last_key
+```
 
-# Prime number and step
+- Prime number and step
+```ruby
 sieve = []
 max = 100
 for i in 2 .. max
@@ -179,8 +208,10 @@ for i in 2 .. Math.sqrt(max)
 end
 
 puts sieve.compact.join(", ")
+```
 
-# What is $!?
+- What is `$!`?
+```ruby
 begin
   opts.parse(ARGV)
   raise OptionParser::MissingArgument if some_parameter.nil?
@@ -188,10 +219,12 @@ begin
 rescue OptionParser::InvalidOption, OptionParser::MissingArgument
   raise $!.to_s
 end
+```
 
-# Ruby profiler: ruby -rprofile
+- Ruby profiler: `ruby -rprofile`
 
-# Benchmark module
+- Benchmark module
+```ruby
 require 'benchmark'
 
 a = (1..10000).collect{rand(1000)}
@@ -201,3 +234,4 @@ Benchmark.bm do |x|
   x.report { intersect1(a, b) }
   x.report { intersect2(a, b) }
 end
+```
