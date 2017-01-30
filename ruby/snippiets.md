@@ -221,7 +221,11 @@ rescue OptionParser::InvalidOption, OptionParser::MissingArgument
 end
 ```
 
-- Ruby profiler: `ruby -rprofile`
+- Ruby profiler: `ruby -rprofile`. Also `ruby-prof` is better.
+```bash
+time ruby -r profile my_code.rb
+ruby-prof my_code.rb
+```
 
 - Benchmark module
 ```ruby
@@ -235,3 +239,7 @@ Benchmark.bm do |x|
   x.report { intersect2(a, b) }
 end
 ```
+
+- Embedding C: `RubyInline`, `require "inline"`, `inline.do |builder| { builder.include "<math.h>" builder.c "" }`
+
+- Ruby's Actor model: `Revactor`, `Dramatis`
