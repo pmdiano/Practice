@@ -243,3 +243,23 @@ end
 - Embedding C: `RubyInline`, `require "inline"`, `inline.do |builder| { builder.include "<math.h>" builder.c "" }`
 
 - Ruby's Actor model: `Revactor`, `Dramatis`
+
+- Patch `String` class:
+```ruby
+class String
+  def is_integer?
+    self.to_i.to_s == self
+  end
+end
+```
+
+- `CSV` module:
+```ruby
+CSV.foreach(ARGV[0], :headers => true) do |row|
+  puts "error" unless row[0].is_integer?
+  puts "error" unless row[1].is_integer?
+  id = row[1].to_i
+  counts[id] ||= 0
+  counts[id] += 1
+end
+```
