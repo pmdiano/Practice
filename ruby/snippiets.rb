@@ -1,20 +1,15 @@
-- array
-```ruby
+# array
 [1].class
 [1].methods.include?(:[])
-```
 
-- hashtable
-```ruby
+# hashtable
 numbers = {1 => 'one', 2 => 'two'}
 numbers[1]
 numbers[2]
 stuff = {:array => [1, 2, 3], :string => 'Hi, mom!'}    # symbol
 stuff[:string]
-```
 
-- function
-```ruby
+# function
 def tell_the_truth(options={})
     if options[:profession] == :lawyer
         'it could be believed that this is almost certainly not false.'
@@ -24,10 +19,8 @@ def tell_the_truth(options={})
 end
 tell_the_truth
 tell_the_truth :profession => :lawyer
-```
 
-- class
-```ruby
+# class
 class Tree
   attr_accessor :children, :node_name
 
@@ -54,10 +47,8 @@ puts
 
 puts "Visiting entire tree"
 ruby_tree.visit_all {|node| puts node.node_name}
-```
 
-- mixin
-```ruby
+# mixin
 module ToFile
   def filename
     "object_#{self.object_id}.txt"
@@ -79,10 +70,8 @@ class Person
     name
   end
 end
-```
 
-- some array functions
-```ruby
+# some array functions
 a = [5, 3, 4, 1]
 a.sort
 a.any? {|i| i > 6}
@@ -95,31 +84,23 @@ a.inject(0) do |sum, i|
   puts "sum: #{sum} i: #{i} sum + i: #{sum + i}"
   sum + i
 end
-```
 
-- StringIO library
-```ruby
+# StringIO library
 require 'stringio'
 out = StringIO()
 puts out.string
-```
 
-- type checking
-```ruby
+# type checking
 if not obj.kind_of?(String)
   raise TypeError, "not a string"
 end
-```
 
-- method checking
-```ruby
+# method checking
 if not obj.respond_to?("to_str")
   raise TypeError, "not a string"
 end
-```
 
-- method_missing to implement Roman number!!
-```ruby
+# method_missing to implement Roman number!!
 class Roman
   def self.method_missing name, *args
     roman = name.to_s
@@ -138,10 +119,8 @@ end
 
 puts Roman.X
 puts Roman.XII
-```
 
-- Regex and hash table
-```ruby
+# Regex and hash table
 date = {}
 ARGF.each do |line|
   if /\d\d\/[A-Z][a-z][a-z]\/\d\d/ =~ line
@@ -159,26 +138,20 @@ date.keys.sort.each do |d|
     printf "%-25s %d\n", url, n
   end
 end
-```
 
-- each_with_object and letter usage
-```ruby
+# each_with_object and letter usage
 (0..23).each_with_object(foo) do |i, h|
   letter = (i+?c.ord).chr
 end
-```
 
-- usage of STDIN and map function
-```ruby
+# usage of STDIN and map function
 STDIN.each_line do |line|
   val = line
   year, temp, q = val[15,4], val[87,5], val[92,1]
   puts "#{year}\t#{temp}" if (temp != "+9999" && q =~ /[01459]/)
 end
-```
 
-- reduce function
-```ruby
+# reduce function
 last_key, max_val = nil, -1000000
 STDIN.each_line do |line|
   key, val = line.split("\t")
@@ -190,10 +163,8 @@ STDIN.each_line do |line|
   end
 end
 puts "#{last_key}\t#{max_val}" if last_key
-```
 
-- Prime number and step
-```ruby
+# Prime number and step
 sieve = []
 max = 100
 for i in 2 .. max
@@ -208,10 +179,8 @@ for i in 2 .. Math.sqrt(max)
 end
 
 puts sieve.compact.join(", ")
-```
 
-- What is `$!`?
-```ruby
+# What is `$!`?
 begin
   opts.parse(ARGV)
   raise OptionParser::MissingArgument if some_parameter.nil?
@@ -219,16 +188,12 @@ begin
 rescue OptionParser::InvalidOption, OptionParser::MissingArgument
   raise $!.to_s
 end
-```
 
-- Ruby profiler: `ruby -rprofile`. Also `ruby-prof` is better.
-```bash
-time ruby -r profile my_code.rb
-ruby-prof my_code.rb
-```
+# Ruby profiler: ruby -rprofile. Also ruby-prof is better.
+# time ruby -r profile my_code.rb
+# ruby-prof my_code.rb
 
-- Benchmark module
-```ruby
+# Benchmark module
 require 'benchmark'
 
 a = (1..10000).collect{rand(1000)}
@@ -238,23 +203,20 @@ Benchmark.bm do |x|
   x.report { intersect1(a, b) }
   x.report { intersect2(a, b) }
 end
-```
 
-- Embedding C: `RubyInline`, `require "inline"`, `inline.do |builder| { builder.include "<math.h>" builder.c "" }`
+# Embedding C: RubyInline
+# require "inline", inline.do |builder| { builder.include "<math.h>" builder.c "" }
 
-- Ruby's Actor model: `Revactor`, `Dramatis`
+# Ruby's Actor model: `Revactor`, `Dramatis`
 
-- Patch `String` class:
-```ruby
+# Patch `String` class:
 class String
   def is_integer?
     self.to_i.to_s == self
   end
 end
-```
 
-- `CSV` module:
-```ruby
+# CSV module:
 CSV.foreach(ARGV[0], :headers => true) do |row|
   puts "error" unless row[0].is_integer?
   puts "error" unless row[1].is_integer?
@@ -262,4 +224,3 @@ CSV.foreach(ARGV[0], :headers => true) do |row|
   counts[id] ||= 0
   counts[id] += 1
 end
-```
