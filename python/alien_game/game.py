@@ -3,6 +3,7 @@ import pygame
 from time import sleep
 from alien import Alien
 from bullet import Bullet
+from button import Button
 from game_stats import GameStats
 from pygame.sprite import Group
 from settings import Settings
@@ -23,6 +24,9 @@ class Game():
         self.__ship = Ship(self.__ai_settings, self.__screen)
         self.__bullets = Group()
         self.__aliens = Group()
+
+        # Make the Play button
+        self.__play_button = Button(ai_settings, screen, "Play")
 
         # Create the fleet of aliens
         self.__create_fleet()
@@ -49,6 +53,9 @@ class Game():
                 self.__check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self.__check_keyup_events(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+                self.__check_play_button(mouse_x, mouse_y)
 
     def __check_keydown_events(self, event):
         """Respond to keypresses."""
@@ -68,6 +75,28 @@ class Game():
         elif event.key == pygame.K_LEFT:
             self.__ship.moving_left = False
 
+    def __check_play_button(self, mouse_x, mouse_y):
+        """Start a new game when the player clicks Play."""
+        button_clicked = self.__play_button.rect.collidepoint(mouse_x, mouse_y)
+        if button_clicked and not self.__stats.game_active:
+            # Reset the game settings
+            self.__ai_settings.initialize_dynamic_settings()
+
+            # Hide the mouse
+            pygame.mouse.set_visible(False)
+
+            # Reset the game statistics
+            self.__stats.reset_stats()
+            self.__stats.game_active = True
+
+            # Empty the list of aliens and bullets.
+            self.__aliens.empty()
+            self.__bullets.empty()
+
+            # Create a new fleet and center the ship.
+            self.__create_fleet()
+            self.__ship.center_ship()
+
     def __update_screen(self):
         """Update images on the screen and flip to the new screen."""
         # Redraw the screen during each pass through the loop
@@ -79,6 +108,10 @@ class Game():
 
         self.__ship.blitme()
         self.__aliens.draw(self.__screen)
+
+        # Draw the play button if the game is inactive.
+        if not self.__stats.game_active:
+            self.__play_button.draw_button()
 
         # Make the most recently drawn screen visible
         pygame.display.flip()
@@ -185,6 +218,7 @@ class Game():
         if len(self.__aliens) == 0:
             # Destroy existing bullets and create new fleet.
             self.__bullets.empty()
+            self.__ai_settings.increase_speed()
             self.__create_fleet()
 
     def __ship_hit(self):
@@ -194,6 +228,7 @@ class Game():
             self.__stats.ships_left -= 1
         else:
             self.__stats.game_active = False
+            pygame.mouse.set_visible(True)
 
         # Empty the list of aliens and bullets
         self.__aliens.empty()
